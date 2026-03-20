@@ -1,348 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jay Shiurkar - Coming Soon</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-blue: #007aff;
-            --space-dark: #0a0a0f;
-            --space-blue: #1a1a2e;
-            --star-white: #ffffff;
-            --text-light: #f5f5f7;
-            --accent-purple: #5856d6;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--space-dark) 0%, var(--space-blue) 100%);
-            color: var(--text-light);
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        /* Subtle Star Field */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .star {
-            position: absolute;
-            background: var(--star-white);
-            border-radius: 50%;
-            opacity: 0.4;
-            animation: twinkle 3s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.3); }
-        }
-
-        /* Main Container */
-        .container {
-            text-align: center;
-            max-width: 600px;
-            padding: 40px 20px;
-            z-index: 10;
-            position: relative;
-        }
-
-        /* Orbital Animation */
-        .orbital {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: rotate 25s linear infinite;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-        }
-
-        .orbital::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: 50%;
-            width: 6px;
-            height: 6px;
-            background: var(--primary-blue);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--primary-blue);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.7; }
-        }
-
-        /* Typography */
-        .name {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--text-light), var(--primary-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .title {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-            font-weight: 600;
-            margin-bottom: 30px;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .construction {
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            margin-bottom: 40px;
-            opacity: 0.7;
-            line-height: 1.6;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .coming-soon {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px 35px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease-out 0.9s both;
-        }
-
-        .coming-soon h3 {
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .coming-soon p {
-            opacity: 0.8;
-            line-height: 1.5;
-        }
-
-        .contact-info {
-            font-size: 1rem;
-            opacity: 0.6;
-            animation: fadeInUp 1s ease-out 1.2s both;
-        }
-
-        .contact-info a {
-            color: var(--primary-blue);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .contact-info a:hover {
-            color: var(--text-light);
-            text-shadow: 0 0 10px var(--primary-blue);
-        }
-
-        /* Loading Animation */
-        .loading-dots {
-            display: inline-block;
-            margin-left: 10px;
-        }
-
-        .loading-dots::after {
-            content: '';
-            animation: dots 2s steps(4, end) infinite;
-        }
-
-        @keyframes dots {
-            0%, 20% { content: ''; }
-            40% { content: '.'; }
-            60% { content: '..'; }
-            80%, 100% { content: '...'; }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Constellation Lines */
-        .constellation {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .constellation-line {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.3), transparent);
-            animation: pulse-line 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse-line {
-            0% { opacity: 0.2; }
-            100% { opacity: 0.6; }
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 15px;
-            }
-
-            .orbital {
-                width: 200px;
-                height: 200px;
-            }
-
-            .coming-soon {
-                padding: 20px 25px;
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px 15px;
-            }
-
-            .orbital {
-                width: 150px;
-                height: 150px;
-            }
-
-            .coming-soon {
-                padding: 15px 20px;
-            }
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Jay Vinod Shiurkar | Client and Technical Relationship Manager</title>
+<meta name="description" content="Client and Technical Relationship Manager portfolio for Jay Vinod Shiurkar."/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='18' fill='%23fff8ef'/><rect x='5' y='5' width='54' height='54' rx='16' fill='%232649ff' opacity='.12'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' font-weight='700' fill='%232649ff'>JS</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/startbootstrap-personal@1.0.1/dist/css/styles.css" rel="stylesheet"/>
+<style>
+:root{--paper:#fffdf8;--bg:#f7f2ea;--ink:#121212;--muted:#4e4b46;--line:rgba(18,18,18,.08);--blue:#2649ff;--gold:#d6a14e;--shadow:0 20px 60px rgba(15,18,34,.08)}
+body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:radial-gradient(circle at top left,rgba(38,73,255,.07),transparent 22%),radial-gradient(circle at 90% 10%,rgba(214,161,78,.08),transparent 18%),linear-gradient(180deg,#f6f1e9 0%,#f9f6f0 48%,#f5efe6 100%);color:var(--ink);padding-top:84px}
+.navbar{backdrop-filter:blur(16px);background:rgba(247,242,234,.78)!important;border-bottom:1px solid rgba(18,18,18,.06)}
+.brand-lockup{display:flex;align-items:center;gap:.85rem}
+.brand-mark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#dbe4ff,#fff5e7);border:1px solid rgba(18,18,18,.08);font-weight:800;color:var(--blue);letter-spacing:.08em}
+.brand-copy{display:flex;flex-direction:column;line-height:1.1}.brand-copy strong{font-size:.95rem}.brand-copy small{font-size:.78rem;color:var(--muted)}
+.nav-link{color:var(--muted)!important;font-weight:600;padding:.65rem 1rem!important;border-radius:999px}.nav-link:hover,.nav-link.active{color:var(--ink)!important;background:rgba(255,255,255,.65)}
+.btn-pill{border-radius:999px;padding:.95rem 1.35rem;font-weight:700}.btn-ink{background:#121212;color:#fff;border:1px solid #121212}.btn-soft{background:linear-gradient(135deg,var(--blue),#5471ff);border:none;color:#fff;box-shadow:0 15px 35px rgba(38,73,255,.18)}.btn-outline-ink{background:rgba(255,255,255,.55);border:1px solid rgba(18,18,18,.08);color:var(--ink)}
+.hero{padding:3.5rem 0 2.5rem}.eyebrow,.kicker{display:inline-flex;align-items:center;gap:.55rem;text-transform:uppercase;letter-spacing:.11em;font-size:.76rem;font-weight:700;color:var(--muted)}.eyebrow::before,.kicker::before{content:"";width:9px;height:9px;border-radius:999px;background:linear-gradient(180deg,var(--blue),var(--gold))}
+h1,.display-title,.contact-title{font-family:"Cormorant Garamond",Georgia,serif;letter-spacing:-.03em;line-height:.95}.hero h1{font-size:clamp(3.2rem,8vw,5.8rem);max-width:11ch;margin:.8rem 0 1rem}.hero h1 span{color:var(--blue)}
+.hero-copy,.section-copy,.work-body p,.timeline-card p,.contact-copy{color:var(--muted);line-height:1.9}.hero-copy{font-size:1.08rem;max-width:60ch}
+.hero-pills,.tool-ribbon{display:flex;flex-wrap:wrap;gap:.7rem}.hero-pills span,.tool-ribbon span{padding:.7rem .95rem;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid rgba(18,18,18,.07);color:var(--muted);font-size:.9rem}
+.hero-visual{position:relative}.hero-card,.panel,.cap-card,.work-card,.contact-card{background:var(--paper);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)}.hero-card{padding:1.1rem}.hero-svg{width:100%;height:auto;border-radius:22px;background:linear-gradient(135deg,#fffdf9,#f1e7da)}
+.float-badge{position:absolute;max-width:210px;background:rgba(255,255,255,.96);border:1px solid rgba(18,18,18,.08);border-radius:18px;padding:.9rem 1rem;box-shadow:0 10px 30px rgba(15,18,34,.08)}.float-badge strong{display:block;font-size:1.35rem}.float-badge span{display:block;font-size:.84rem;line-height:1.5;color:var(--muted)}
+.f1{top:-1rem;right:-.5rem}.f2{left:-1rem;bottom:5rem}.f3{right:1rem;bottom:-.35rem}
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2.2rem}.strip>div{padding:1.2rem 1.25rem;background:rgba(255,255,255,.62);border:1px solid rgba(18,18,18,.06);border-radius:22px}.strip span{display:inline-block;margin-bottom:.5rem;color:var(--blue);font-size:.84rem;font-weight:700}.strip p{margin:0;color:var(--muted);line-height:1.7;font-size:.95rem}
+.section-wrap{padding:5.25rem 0}.section-head{max-width:860px;margin-bottom:2.3rem}.display-title,.contact-title{font-size:clamp(2.5rem,6vw,4.4rem);margin:.75rem 0 0}.panel{padding:1.35rem;height:100%}.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1rem;align-items:center}.mini-title{font-size:1.75rem;margin:.55rem 0 .75rem}
+.scene{background:linear-gradient(135deg,#f1e8db,#fffdf8);border-radius:24px;padding:.75rem}
+.principles{display:grid;gap:1rem}.principle{display:grid;grid-template-columns:auto 1fr;gap:1rem;padding:1.1rem 1.15rem;background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.principle i{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#dce4ff,#fff1d7);color:var(--blue);font-size:1.2rem}.principle h3{font-size:1.03rem;margin:0 0 .35rem}.principle p{margin:0;color:var(--muted);line-height:1.7;font-size:.95rem}
+.soft-band{background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.1));border-top:1px solid rgba(18,18,18,.05);border-bottom:1px solid rgba(18,18,18,.05)}
+.cap-card{padding:1.45rem;height:100%}.cap-icon{width:54px;height:54px;border-radius:17px;background:linear-gradient(135deg,#dce4ff,#fff0d1);color:var(--blue);display:grid;place-items:center;font-size:1.25rem;margin-bottom:1rem}.cap-card h3{font-size:1.18rem;margin-bottom:.7rem}.cap-card p{color:var(--muted);line-height:1.75}.cap-card ul{padding-left:1.05rem;margin:1rem 0 0;color:var(--muted)}
+.work-card{overflow:hidden;height:100%}.thumb{aspect-ratio:16/10;display:grid;place-items:center;background:linear-gradient(135deg,#ebdfcf,#fefcf8);border-bottom:1px solid rgba(18,18,18,.06)}.thumb svg{width:100%;height:100%}.work-body{padding:1.35rem}.work-meta{display:flex;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-bottom:.8rem}.work-meta span{font-size:.82rem;text-transform:uppercase;letter-spacing:.09em;color:var(--gold);font-weight:700}.work-meta strong{font-size:.92rem;color:var(--blue)}.work-body h3{font-size:1.23rem;margin:0 0 .65rem}.work-body ul{padding-left:1.05rem;margin:1rem 0 0;color:var(--muted)}
+.dark-band{background:linear-gradient(135deg,#161c2c,#20273a 55%,#171c28);color:#fff}.dark-band .display-title,.dark-band .kicker,.dark-band .section-copy{color:#fff}.dark-band .kicker::before{background:linear-gradient(180deg,#7ea0ff,#f0c37d)}.dark-band .section-copy,.dark-band .timeline-card p,.dark-band .timeline-meta span{opacity:.8;color:#fff}
+.timeline{position:relative;padding-left:1rem}.timeline::before{content:"";position:absolute;left:12px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,rgba(126,160,255,.8),rgba(240,195,125,.3))}.timeline-item{position:relative;padding-left:2.4rem}.timeline-item+.timeline-item{margin-top:1.15rem}.timeline-dot{position:absolute;left:0;top:.65rem;width:14px;height:14px;border-radius:999px;background:linear-gradient(135deg,#8ba9ff,#f3ca8b);box-shadow:0 0 0 8px rgba(139,169,255,.12)}.timeline-card{padding:1.15rem 1.25rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:24px}.timeline-meta{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.45rem}
+.contact-card{padding:1.55rem;display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center}.contact-actions{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:flex-end}.footer{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1.3rem 0 0;color:var(--muted);font-size:.92rem}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.on{opacity:1;transform:none}
+@media (max-width:1199.98px){.strip{grid-template-columns:1fr}.f1{right:.75rem}.f2{left:.75rem;bottom:4rem}}
+@media (max-width:991.98px){body{padding-top:78px}.hero h1{max-width:100%}.about-grid,.contact-card{grid-template-columns:1fr}.contact-actions{justify-content:flex-start}}
+@media (max-width:767.98px){.section-wrap{padding:4.15rem 0}.hero h1,.display-title,.contact-title{line-height:1}.float-badge{position:static;max-width:none;margin-top:.8rem}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}*{transition:none!important}}
+</style>
 </head>
 <body>
-    <!-- Subtle Star Field -->
-    <div class="stars" id="stars"></div>
-
-    <!-- Constellation Lines -->
-    <div class="constellation">
-        <div class="constellation-line" style="top: 25%; left: 15%; width: 120px; transform: rotate(30deg);"></div>
-        <div class="constellation-line" style="top: 70%; right: 20%; width: 150px; transform: rotate(-45deg);"></div>
-        <div class="constellation-line" style="bottom: 20%; left: 30%; width: 100px; transform: rotate(60deg);"></div>
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container px-4 px-lg-5">
+    <a class="navbar-brand brand-lockup" href="#top">
+      <span class="brand-mark">JS</span>
+      <span class="brand-copy"><strong>Jay Vinod Shiurkar</strong><small>Client and Technical Relationship Manager</small></span>
+    </a>
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"><span class="bi bi-list fs-2 text-dark"></span></button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#capabilities">Capabilities</a></li>
+        <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item ms-lg-2"><a class="btn btn-ink btn-pill" href="#contact">Contact</a></li>
+      </ul>
     </div>
+  </div>
+</nav>
 
-    <!-- Orbital Animation -->
-    <div class="orbital"></div>
-
-    <!-- Main Content -->
-    <div class="container">
-        <h1 class="name">Jay Shiurkar</h1>
-        <h2 class="title">Product Manager</h2>
-        
-        <p class="construction">
-            Portfolio website under construction<span class="loading-dots"></span>
-        </p>
-
-        <div class="coming-soon">
-            <h3> Launching Soon</h3>
-            <p>
-                Building my portfolio website, showcasing risk management expertise, 
-                data-driven strategies, and innovative solutions. 
-                Stay tuned for the launch!
-            </p>
+<main id="top">
+<section class="hero">
+  <div class="container px-4 px-lg-5">
+    <div class="row align-items-center gy-5 gx-xl-5">
+      <div class="col-xl-6">
+        <div class="eyebrow reveal">New York | Deloitte | NYU</div>
+        <h1 class="reveal">I turn complex client needs into <span>clear technical action</span>.</h1>
+        <p class="hero-copy reveal">Client and Technical Relationship Manager with experience across stakeholder discovery, enterprise workflows, reporting, automation, proposal support, and cross-functional delivery. I work where client trust, technical detail, and execution discipline need to hold together.</p>
+        <div class="d-flex flex-wrap gap-3 mb-4 reveal">
+          <a class="btn btn-soft btn-pill" href="#work">View selected work</a>
+          <a class="btn btn-outline-ink btn-pill" href="https://www.linkedin.com/in/jayshiurkar" target="_blank" rel="noreferrer">LinkedIn</a>
         </div>
-
-        <div class="contact-info">
-            For inquiries: <a href="mailto:jayvshiurkar@gmail.com">jayvshiurkar@gmail.com</a> | 
-            <a href="https://linkedin.com/in/jayshiurkar" target="_blank">LinkedIn</a>
+        <div class="hero-pills reveal">
+          <span>Stakeholder alignment</span><span>Workflow transformation</span><span>Commercial support</span><span>Analytics-led reporting</span>
         </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="hero-visual reveal">
+          <div class="hero-card">
+            <svg class="hero-svg" viewBox="0 0 760 620" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylized illustration of dashboards, workflow coordination, and client delivery.">
+              <rect width="760" height="620" rx="40" fill="#FFF8EF"/><circle cx="109" cy="105" r="74" fill="#E4EBFF"/><circle cx="652" cy="512" r="96" fill="#F8E4C4"/><rect x="114" y="116" width="532" height="356" rx="28" fill="#1F2434"/><rect x="134" y="138" width="492" height="316" rx="20" fill="#F9F7F1"/><rect x="168" y="174" width="152" height="84" rx="18" fill="#EEF3FF"/><rect x="186" y="194" width="72" height="12" rx="6" fill="#2649FF"/><rect x="186" y="220" width="102" height="10" rx="5" fill="#8196D8"/><rect x="186" y="241" width="84" height="10" rx="5" fill="#D6A14E" opacity=".65"/><rect x="338" y="174" width="254" height="132" rx="20" fill="#FFF8EF" stroke="#E6DDCF"/><path d="M373 275C397 251 420 235 446 229C470 223 495 226 518 208C535 195 554 173 564 160" stroke="#2649FF" stroke-width="8" stroke-linecap="round"/><circle cx="374" cy="274" r="10" fill="#2649FF"/><circle cx="446" cy="229" r="10" fill="#D6A14E"/><circle cx="518" cy="208" r="10" fill="#2649FF"/><circle cx="564" cy="160" r="10" fill="#D6A14E"/><rect x="168" y="290" width="424" height="128" rx="20" fill="#FBFAF6" stroke="#E6DDCF"/><rect x="194" y="320" width="118" height="58" rx="16" fill="#EEF3FF"/><rect x="329" y="320" width="118" height="58" rx="16" fill="#FFF1D8"/><rect x="464" y="320" width="102" height="58" rx="16" fill="#EEF3FF"/><rect x="208" y="336" width="48" height="10" rx="5" fill="#2649FF"/><rect x="208" y="354" width="72" height="8" rx="4" fill="#8498D5"/><rect x="343" y="336" width="52" height="10" rx="5" fill="#D6A14E"/><rect x="343" y="354" width="78" height="8" rx="4" fill="#C2AE87"/><rect x="478" y="336" width="40" height="10" rx="5" fill="#2649FF"/><rect x="478" y="354" width="64" height="8" rx="4" fill="#8498D5"/><path d="M258 512C288 487 334 474 388 474C445 474 493 488 525 512" stroke="#1F2434" stroke-width="16" stroke-linecap="round"/><rect x="254" y="500" width="278" height="26" rx="13" fill="#1F2434"/>
+            </svg>
+          </div>
+          <div class="float-badge f1"><strong>30+</strong><span>stakeholders aligned across delivery and reporting streams</span></div>
+          <div class="float-badge f2"><strong>$2M+</strong><span>annual efficiency value supported through workflow improvements</span></div>
+          <div class="float-badge f3"><strong>150+</strong><span>qualified event leads generated through structured outreach</span></div>
+        </div>
+      </div>
     </div>
+    <div class="strip reveal">
+      <div><span>What I do best</span><p>Bridge business, delivery, and technical teams without losing clarity for the client.</p></div>
+      <div><span>How I work</span><p>Discovery, structuring, reporting, follow-through, and visible momentum.</p></div>
+      <div><span>Where I add value</span><p>Enterprise programs, client-facing technical roles, and operations-heavy environments.</p></div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Create star field
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            const numStars = 40;
-            
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = Math.random() * 2 + 1 + 'px';
-                star.style.height = star.style.width;
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starsContainer.appendChild(star);
-            }
-        }
+<section class="section-wrap" id="about">
+  <div class="container px-4 px-lg-5">
+    <div class="section-head reveal"><span class="kicker">About</span><h2 class="display-title">Commercially aware, technically grounded, and comfortable in ambiguous environments.</h2><p class="section-copy">My background covers Deloitte delivery work, governance workflows, automation-led process redesign, proposal support, and growth-oriented university outreach. Across all of it, the common pattern is the same: understand the brief, align the right people, and make progress visible.</p></div>
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-7">
+        <div class="panel reveal about-grid">
+          <div><span class="kicker">Working style</span><h3 class="mini-title">Structure first. Clarity always.</h3><p class="section-copy">I am strongest in roles where a client or internal stakeholder needs someone who can listen closely, organize messy inputs, translate them for technical teams, and keep the work moving through milestones, reviews, and decision points.</p></div>
+          <div class="scene">
+            <svg viewBox="0 0 520 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Minimal vector composition showing communication, workflow, and planning.">
+              <rect width="520" height="420" rx="28" fill="#FFF8EF"/><rect x="52" y="54" width="416" height="290" rx="24" fill="#F9F7F1" stroke="#E7DED0"/><rect x="92" y="98" width="100" height="72" rx="18" fill="#EEF3FF"/><rect x="209" y="98" width="100" height="72" rx="18" fill="#FFF1D8"/><rect x="326" y="98" width="100" height="72" rx="18" fill="#EEF3FF"/><rect x="92" y="224" width="100" height="72" rx="18" fill="#FFF1D8"/><rect x="209" y="224" width="100" height="72" rx="18" fill="#EEF3FF"/><rect x="326" y="224" width="100" height="72" rx="18" fill="#FFF1D8"/><path d="M192 134H209M309 134H326M142 170V224M259 170V224M376 170V224" stroke="#1F2434" stroke-width="6" stroke-linecap="round"/><circle cx="142" cy="134" r="14" fill="#2649FF"/><circle cx="259" cy="134" r="14" fill="#D6A14E"/><circle cx="376" cy="134" r="14" fill="#2649FF"/><circle cx="142" cy="260" r="14" fill="#D6A14E"/><circle cx="259" cy="260" r="14" fill="#2649FF"/><circle cx="376" cy="260" r="14" fill="#D6A14E"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="principles">
+          <article class="principle reveal"><i class="bi bi-chat-left-text"></i><div><h3>Client communication</h3><p>Simplify technical and operational detail into language decision-makers can trust.</p></div></article>
+          <article class="principle reveal"><i class="bi bi-diagram-3"></i><div><h3>Cross-functional coordination</h3><p>Keep business, technology, operations, and compliance teams aligned around one execution path.</p></div></article>
+          <article class="principle reveal"><i class="bi bi-bar-chart"></i><div><h3>Reporting with purpose</h3><p>Use dashboards, status notes, and visual updates to help teams act faster and with less friction.</p></div></article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Initialize
-        createStars();
+<section class="section-wrap soft-band" id="capabilities">
+  <div class="container px-4 px-lg-5">
+    <div class="section-head reveal"><span class="kicker">Capabilities</span><h2 class="display-title">Where my experience translates well.</h2><p class="section-copy">The strongest fit for me is work that combines client interaction, technical understanding, structured delivery, and strong follow-through.</p></div>
+    <div class="row g-4">
+      <div class="col-lg-4"><article class="cap-card reveal"><div class="cap-icon"><i class="bi bi-search"></i></div><h3>Discovery and qualification</h3><p>Surface workflow gaps, document needs clearly, frame opportunities, and turn open-ended discussions into scoped action.</p><ul><li>Requirements framing</li><li>Stakeholder interviews</li><li>Issue and dependency mapping</li></ul></article></div>
+      <div class="col-lg-4"><article class="cap-card reveal"><div class="cap-icon"><i class="bi bi-layers"></i></div><h3>Workflow and delivery support</h3><p>Coordinate enterprise workflows spanning reporting, approvals, testing, change requests, and launch readiness.</p><ul><li>UAT and SIT coordination</li><li>Operational workflow design</li><li>Governance and controls context</li></ul></article></div>
+      <div class="col-lg-4"><article class="cap-card reveal"><div class="cap-icon"><i class="bi bi-graph-up-arrow"></i></div><h3>Commercial and reporting support</h3><p>Support proposals, decks, ROI logic, dashboards, and follow-up plans that help conversations move toward decisions.</p><ul><li>Executive updates</li><li>Proposal materials</li><li>Pipeline and KPI visibility</li></ul></article></div>
+    </div>
+    <div class="tool-ribbon mt-4 reveal"><span>ServiceNow GRC</span><span>SAP MM</span><span>UiPath</span><span>ABBYY OCR</span><span>Tableau</span><span>Power BI</span><span>Python</span><span>SQL</span><span>Jira</span><span>Power Automate</span></div>
+  </div>
+</section>
 
-        // Add some interactive sparkles on click
-        document.addEventListener('click', function(e) {
-            const sparkle = document.createElement('div');
-            sparkle.style.position = 'fixed';
-            sparkle.style.left = e.clientX + 'px';
-            sparkle.style.top = e.clientY + 'px';
-            sparkle.style.width = '4px';
-            sparkle.style.height = '4px';
-            sparkle.style.background = '#007aff';
-            sparkle.style.borderRadius = '50%';
-            sparkle.style.pointerEvents = 'none';
-            sparkle.style.zIndex = '1000';
-            sparkle.style.boxShadow = '0 0 10px #007aff';
-            sparkle.style.animation = 'sparkle 1s ease-out forwards';
-            
-            document.body.appendChild(sparkle);
-            
-            setTimeout(() => {
-                sparkle.remove();
-            }, 1000);
-        });
+<section class="section-wrap" id="work">
+  <div class="container px-4 px-lg-5">
+    <div class="section-head reveal"><span class="kicker">Selected work</span><h2 class="display-title">Work that shows the blend of client, process, and technical execution.</h2><p class="section-copy">Built from the strongest themes in my experience: workflow transformation, analytics-backed reporting, proposal support, and coordinated execution across multiple teams.</p></div>
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <article class="work-card reveal">
+          <div class="thumb"><svg viewBox="0 0 720 450" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="720" height="450" rx="36" fill="#FBF7F0"/><rect x="60" y="70" width="600" height="270" rx="28" fill="#1F2434"/><rect x="82" y="92" width="556" height="226" rx="20" fill="#F8F6F1"/><path d="M196 158C196 121 226 92 263 92H360V178C360 215 330 245 293 245H196V158Z" fill="#2649FF"/><path d="M360 92H457C494 92 524 121 524 158V245H427C390 245 360 215 360 178V92Z" fill="#EEF3FF"/><path d="M260 182L299 219L353 149" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="120" y="364" width="156" height="42" rx="21" fill="#2649FF"/><rect x="294" y="364" width="134" height="42" rx="21" fill="#FFF1D8"/><rect x="445" y="364" width="156" height="42" rx="21" fill="#E3EBFF"/></svg></div>
+          <div class="work-body"><div class="work-meta"><span>Governance workflow</span><strong>$2M+ annual savings</strong></div><h3>Privacy and controls workspace delivery</h3><p>Helped translate stakeholder needs into structured workflow delivery across privacy, governance, reporting, and remediation tracking for regulated environments.</p><ul><li>Mapped requirements and handoffs across business, engineering, and compliance teams</li><li>Supported user stories, documentation, testing coordination, and reporting visibility</li><li>Kept adoption and delivery conversations grounded in business outcomes</li></ul></div>
+        </article>
+      </div>
+      <div class="col-lg-4">
+        <article class="work-card reveal">
+          <div class="thumb"><svg viewBox="0 0 720 450" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="720" height="450" rx="36" fill="#FCF8F2"/><rect x="70" y="116" width="148" height="194" rx="24" fill="#F0F4FF"/><rect x="286" y="116" width="148" height="194" rx="24" fill="#FFF1D8"/><rect x="502" y="116" width="148" height="194" rx="24" fill="#F0F4FF"/><path d="M218 213H286M434 213H502" stroke="#1F2434" stroke-width="8" stroke-linecap="round"/><circle cx="360" cy="214" r="52" fill="#2649FF"/><path d="M334 215L352 233L387 196" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="210" y="356" width="300" height="24" rx="12" fill="#1F2434"/></svg></div>
+          <div class="work-body"><div class="work-meta"><span>Automation and operations</span><strong>Multi-step finance workflow</strong></div><h3>OCR to SAP invoice and payment workflow</h3><p>Supported automation across invoice reading, document classification, SAP posting, tax handling, and downstream finance operations tied to payment processes.</p><ul><li>Connected OCR, SAP, and exception handling steps into a more structured operating flow</li><li>Improved visibility into batch cadence, review points, and handoff quality</li><li>Reduced manual touchpoints in document-heavy finance operations</li></ul></div>
+        </article>
+      </div>
+      <div class="col-lg-4">
+        <article class="work-card reveal">
+          <div class="thumb"><svg viewBox="0 0 720 450" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="720" height="450" rx="36" fill="#FCF8F2"/><rect x="82" y="84" width="556" height="282" rx="30" fill="#F9F6F0" stroke="#E8DECF"/><rect x="124" y="130" width="180" height="94" rx="22" fill="#EEF3FF"/><rect x="336" y="130" width="260" height="94" rx="22" fill="#FFF1D8"/><path d="M170 288C205 268 241 250 284 250C332 250 365 281 407 281C458 281 503 234 554 234" stroke="#2649FF" stroke-width="8" stroke-linecap="round"/><circle cx="170" cy="288" r="10" fill="#2649FF"/><circle cx="284" cy="250" r="10" fill="#D6A14E"/><circle cx="407" cy="281" r="10" fill="#2649FF"/><circle cx="554" cy="234" r="10" fill="#D6A14E"/><rect x="250" y="354" width="220" height="22" rx="11" fill="#1F2434"/></svg></div>
+          <div class="work-body"><div class="work-meta"><span>Growth and engagement</span><strong>150+ leads / semester</strong></div><h3>Outreach and partner-facing event pipeline</h3><p>Built a more structured outreach motion for NYU programming through channel planning, targeted follow-up, and clearer audience positioning.</p><ul><li>Drove lead generation through LinkedIn, email, and partner networks</li><li>Raised lead-to-attendance conversion above 45% through sharper messaging</li><li>Supported sponsor-facing and community-facing communications with better consistency</li></ul></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Add sparkle animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes sparkle {
-                0% { transform: scale(0) rotate(0deg); opacity: 1; }
-                50% { transform: scale(1.5) rotate(180deg); opacity: 0.8; }
-                100% { transform: scale(0) rotate(360deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+<section class="section-wrap dark-band" id="experience">
+  <div class="container px-4 px-lg-5">
+    <div class="section-head reveal"><span class="kicker">Experience</span><h2 class="display-title">A background built around clarity, delivery, and momentum.</h2><p class="section-copy">The roles differ, but the pattern is consistent: understand the objective, align the team, and keep work moving.</p></div>
+    <div class="timeline">
+      <article class="timeline-item reveal"><span class="timeline-dot"></span><div class="timeline-card"><div class="timeline-meta"><strong>Marketing and Outreach Lead</strong><span>NYU Tandon Consulting Club | Nov 2024 - Present</span></div><p>Built structured outreach and follow-up systems that helped convert interest into attendance, partner engagement, and stronger event visibility.</p></div></article>
+      <article class="timeline-item reveal"><span class="timeline-dot"></span><div class="timeline-card"><div class="timeline-meta"><strong>Assistant Manager, Technology and Transformation</strong><span>Deloitte | Jun 2023 - Jul 2024</span></div><p>Supported proposal work, stakeholder discovery, delivery coordination, workflow design, and analytics-led reporting across regulated client environments.</p></div></article>
+      <article class="timeline-item reveal"><span class="timeline-dot"></span><div class="timeline-card"><div class="timeline-meta"><strong>Consultant, Risk Advisory</strong><span>Deloitte | Jun 2021 - May 2023</span></div><p>Worked across automation, governance, dashboards, and operational process improvement while collaborating with business and technical stakeholders.</p></div></article>
+      <article class="timeline-item reveal"><span class="timeline-dot"></span><div class="timeline-card"><div class="timeline-meta"><strong>Intern, Risk Advisory</strong><span>Deloitte | Dec 2020 - May 2021</span></div><p>Supported proof-of-concept delivery, testing, documentation, and reporting improvements for automation-oriented workstreams.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section-wrap" id="contact">
+  <div class="container px-4 px-lg-5">
+    <div class="contact-card reveal">
+      <div><span class="kicker">Contact</span><h2 class="contact-title">Open to client-facing technical roles, delivery support, and relationship management work.</h2><p class="contact-copy">If you are looking for someone who can move between stakeholders, workflows, delivery teams, and reporting with calm structure and strong follow-through, I would love to connect.</p></div>
+      <div class="contact-actions"><a class="btn btn-soft btn-pill" href="mailto:jayvshiurkar@gmail.com">jayvshiurkar@gmail.com</a><a class="btn btn-outline-ink btn-pill" href="https://www.linkedin.com/in/jayshiurkar" target="_blank" rel="noreferrer">LinkedIn</a></div>
+    </div>
+    <footer class="footer"><span>© <span id="year"></span> Jay Vinod Shiurkar</span><span>Custom domain ready for jayshiurkar.com</span></footer>
+  </div>
+</section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();
+const items=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver((entries)=>{entries.forEach((e)=>{if(!e.isIntersecting)return;e.target.classList.add('on');io.unobserve(e.target);});},{threshold:.14});
+items.forEach((el)=>io.observe(el));
+const navLinks=document.querySelectorAll('.nav-link');
+const sections=['about','capabilities','work','experience','contact'].map((id)=>document.getElementById(id)).filter(Boolean);
+const navIo=new IntersectionObserver((entries)=>{entries.forEach((e)=>{if(!e.isIntersecting)return;navLinks.forEach((link)=>{const href=link.getAttribute('href');if(!href||!href.startsWith('#'))return;link.classList.toggle('active',href===`#${e.target.id}`);});});},{rootMargin:'-35% 0px -50% 0px',threshold:.01});
+sections.forEach((section)=>navIo.observe(section));
+</script>
 </body>
 </html>
