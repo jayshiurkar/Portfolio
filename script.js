@@ -1,0 +1,1 @@
+document.querySelectorAll('.reveal').forEach((node)=>{const ob=new IntersectionObserver((entries)=>{entries.forEach((entry)=>{if(!entry.isIntersecting)return;entry.target.classList.add('on');ob.unobserve(entry.target);});},{threshold:.12});ob.observe(node)});const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();
