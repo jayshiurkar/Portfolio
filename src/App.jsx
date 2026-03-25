@@ -9,11 +9,11 @@ import {
 const F = { d: "Outfit, sans-serif", m: "'DM Mono', monospace" };
 const C = {
   bg: "#06090f",
-  card: "rgba(255,255,255,0.04)",
-  border: "rgba(255,255,255,0.08)",
-  text: "rgba(255,255,255,0.92)",
-  muted: "rgba(255,255,255,0.50)",
-  faint: "rgba(255,255,255,0.28)",
+  card: "rgba(255,255,255,0.045)",
+  border: "rgba(255,255,255,0.10)",
+  text: "rgba(255,255,255,0.95)",
+  muted: "rgba(255,255,255,0.68)",
+  faint: "rgba(255,255,255,0.48)",
 };
 
 const PAGES = [
@@ -27,7 +27,7 @@ const PAGES = [
 
 const JOURNEY = [
   { id: "consulting", kicker: "Foundation", title: "Consulting & Workflow Design", summary: "Deloitte gave me the operating lens: discovery, alignment, and delivery discipline in regulated environments.", tags: ["Discovery", "Stakeholder alignment", "Delivery"], icon: Layers, year: "2019–23", color: "#22d3ee" },
-  { id: "finance", kicker: "Learning Arc", title: "Finance Depth at NYU", summary: "Building portfolio context and institutional workflow depth through Management of Technology coursework.", tags: ["NYU MOT", "Portfolio", "Institutional"], icon: TrendingUp, year: "2023–25", color: "#818cf8" },
+  { id: "finance", kicker: "Learning Arc", title: "Finance Depth at NYU", summary: "Building portfolio context and institutional workflow depth through Technology Management coursework.", tags: ["NYU", "Portfolio", "Institutional"], icon: TrendingUp, year: "2023–25", color: "#818cf8" },
   { id: "communication", kicker: "Core Strength", title: "Teaching & Clarity", summary: "Translating dense concepts into language people can actually use — across mentoring and TA roles.", tags: ["Communication", "Mentoring", "Clarity"], icon: Users, year: "Ongoing", color: "#a78bfa" },
   { id: "direction", kicker: "Direction", title: "Institutional Fintech", summary: "Intentionally building toward long-term client relationships in institutional finance and fintech.", tags: ["Client engagement", "Fintech", "Platforms"], icon: Globe, year: "2025→", color: "#f59e0b" },
 ];
@@ -53,11 +53,8 @@ const THINKING = [
 
 function Card({ children, style = {}, hover = true, onClick }) {
   return (
-    <motion.div
-      onClick={onClick}
-      whileHover={hover ? { y: -2, transition: { duration: 0.12 } } : {}}
-      style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 20, fontFamily: F.d, ...style }}
-    >
+    <motion.div onClick={onClick} whileHover={hover ? { y: -2, transition: { duration: 0.12 } } : {}}
+      style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 20, fontFamily: F.d, ...style }}>
       {children}
     </motion.div>
   );
@@ -65,7 +62,7 @@ function Card({ children, style = {}, hover = true, onClick }) {
 
 function Eyebrow({ children, style = {} }) {
   return (
-    <div style={{ fontFamily: F.m, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.muted, ...style }}>
+    <div style={{ fontFamily: F.m, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.faint, ...style }}>
       {children}
     </div>
   );
@@ -75,9 +72,9 @@ function Pip({ color, style = {} }) {
   return <div style={{ width: 28, height: 2, borderRadius: 2, background: color, ...style }} />;
 }
 
-function Tag({ children, color = C.border, textColor = C.faint }) {
+function Tag({ children, color = C.border, textColor }) {
   return (
-    <span style={{ padding: "2px 9px", borderRadius: 20, border: `1px solid ${color}`, fontSize: 10, color: textColor, fontFamily: F.m, letterSpacing: "0.05em", whiteSpace: "nowrap" }}>
+    <span style={{ padding: "2px 9px", borderRadius: 20, border: `1px solid ${color}`, fontSize: 10, color: textColor || C.muted, fontFamily: F.m, letterSpacing: "0.05em", whiteSpace: "nowrap" }}>
       {children}
     </span>
   );
@@ -95,7 +92,7 @@ function Timeline() {
   const cols = ["#22d3ee", "#818cf8", "#a78bfa", "#f59e0b"];
   return (
     <svg viewBox="0 0 600 68" style={{ width: "100%", height: 68 }} aria-hidden="true">
-      <line x1="50" y1="34" x2="550" y2="34" stroke="rgba(255,255,255,0.08)" strokeWidth="1.5" strokeDasharray="5 5" />
+      <line x1="50" y1="34" x2="550" y2="34" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" strokeDasharray="5 5" />
       {JOURNEY.map((item, i) => {
         const x = 50 + i * 166;
         return (
@@ -103,7 +100,7 @@ function Timeline() {
             <circle cx={x} cy="34" r="9" fill={`${cols[i]}18`} stroke={cols[i]} strokeWidth="1.5" />
             <circle cx={x} cy="34" r="3.5" fill={cols[i]} />
             <text x={x} y="15" textAnchor="middle" fill={cols[i]} fontSize="8.5" fontFamily={F.m} letterSpacing="0.05em">{item.year}</text>
-            <text x={x} y="56" textAnchor="middle" fill="rgba(255,255,255,0.42)" fontSize="9" fontFamily={F.d}>{item.kicker}</text>
+            <text x={x} y="56" textAnchor="middle" fill="rgba(255,255,255,0.60)" fontSize="9" fontFamily={F.d}>{item.kicker}</text>
           </g>
         );
       })}
@@ -120,8 +117,8 @@ function MiniVenn() {
       </defs>
       <circle cx="110" cy="79" r="62" fill="url(#rg1)" />
       <circle cx="190" cy="79" r="62" fill="url(#rg2)" />
-      <text x="62" y="44" fill="rgba(255,255,255,0.55)" fontSize="9" fontFamily={F.m} letterSpacing="0.12em">CLIENT</text>
-      <text x="196" y="44" fill="rgba(255,255,255,0.55)" fontSize="9" fontFamily={F.m} letterSpacing="0.12em">TECH</text>
+      <text x="62" y="44" fill="rgba(255,255,255,0.70)" fontSize="9" fontFamily={F.m} letterSpacing="0.12em">CLIENT</text>
+      <text x="196" y="44" fill="rgba(255,255,255,0.70)" fontSize="9" fontFamily={F.m} letterSpacing="0.12em">TECH</text>
       <text x="150" y="73" textAnchor="middle" fill="rgba(255,255,255,0.95)" fontSize="10" fontWeight="600" fontFamily={F.d}>Client</text>
       <text x="150" y="90" textAnchor="middle" fill="rgba(255,255,255,0.95)" fontSize="10" fontWeight="600" fontFamily={F.d}>Engagement</text>
     </svg>
@@ -129,19 +126,15 @@ function MiniVenn() {
 }
 
 function SkillBars({ category }) {
-  const vals = [91, 83, 87, 78, 85, 80, 76];
+  const vals = [91, 83, 87, 78, 85];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
       {category.skills.slice(0, 5).map((skill, i) => (
         <div key={skill} style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span style={{ flex: 1, fontSize: 11.5, color: C.muted, minWidth: 0 }}>{skill}</span>
-          <div style={{ width: 64, height: 3, background: "rgba(255,255,255,0.07)", borderRadius: 4, overflow: "hidden", flexShrink: 0 }}>
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${vals[i]}%` }}
-              transition={{ delay: i * 0.07, duration: 0.5, ease: "easeOut" }}
-              style={{ height: "100%", background: category.color, borderRadius: 4 }}
-            />
+          <div style={{ width: 64, height: 3, background: "rgba(255,255,255,0.10)", borderRadius: 4, overflow: "hidden", flexShrink: 0 }}>
+            <motion.div initial={{ width: 0 }} animate={{ width: `${vals[i]}%` }} transition={{ delay: i * 0.07, duration: 0.5, ease: "easeOut" }}
+              style={{ height: "100%", background: category.color, borderRadius: 4 }} />
           </div>
         </div>
       ))}
@@ -163,6 +156,8 @@ export default function Portfolio() {
   const [selSkill, setSelSkill] = useState("client");
 
   useEffect(() => {
+    document.documentElement.style.cssText = "background:#06090f;height:100%;margin:0;padding:0;";
+    document.body.style.cssText = "background:#06090f;margin:0;padding:0;";
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap";
@@ -173,7 +168,6 @@ export default function Portfolio() {
   const activeWork = WORK.find(w => w.id === selWork);
   const activeThink = THINKING.find(t => t.id === selThink);
   const activeSkill = SKILL_CATS.find(s => s.id === selSkill);
-
   const cardBtn = (style = {}) => ({ textAlign: "left", background: "none", border: "none", padding: 0, cursor: "pointer", width: "100%", display: "block", ...style });
 
   return (
@@ -191,12 +185,12 @@ export default function Portfolio() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
           <Card style={{ padding: "8px 16px", display: "flex", alignItems: "center", gap: 10, borderRadius: 14 }} hover={false}>
             <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#22d3ee", boxShadow: "0 0 8px rgba(34,211,238,0.55)" }} />
-            <span style={{ fontSize: 13, fontWeight: 600 }}>Jay Vinod Shiurkar</span>
-            <span style={{ fontSize: 10, color: C.muted, fontFamily: F.m }}>NYC · MOT '26</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: C.text }}>Jay Shiurkar</span>
+            <span style={{ fontSize: 10, color: C.muted, fontFamily: F.m }}>NYC · Technology Management</span>
           </Card>
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
             {["Client Engagement", "Financial Technology", "Institutional Workflows"].map(t => (
-              <Tag key={t} color={C.border} textColor={C.muted}>{t}</Tag>
+              <Tag key={t}>{t}</Tag>
             ))}
           </div>
         </div>
@@ -211,11 +205,8 @@ export default function Portfolio() {
               const Icon = p.icon;
               const active = page === p.id;
               return (
-                <button
-                  key={p.id}
-                  onClick={() => setPage(p.id)}
-                  style={{ width: "100%", display: "flex", alignItems: "center", gap: 9, padding: "8px 11px", borderRadius: 12, background: active ? "rgba(255,255,255,0.09)" : "transparent", border: "none", cursor: "pointer", color: active ? C.text : C.muted, fontFamily: F.d, fontSize: 12.5, fontWeight: active ? 500 : 400, transition: "all 0.15s", textAlign: "left", letterSpacing: "0.01em" }}
-                >
+                <button key={p.id} onClick={() => setPage(p.id)}
+                  style={{ width: "100%", display: "flex", alignItems: "center", gap: 9, padding: "8px 11px", borderRadius: 12, background: active ? "rgba(255,255,255,0.09)" : "transparent", border: "none", cursor: "pointer", color: active ? C.text : C.muted, fontFamily: F.d, fontSize: 12.5, fontWeight: active ? 500 : 400, transition: "all 0.15s", textAlign: "left" }}>
                   <Icon size={13} />
                   {p.label}
                 </button>
@@ -230,64 +221,63 @@ export default function Portfolio() {
               {/* ── OVERVIEW ── */}
               {page === "overview" && (
                 <motion.div key="overview" variants={pv} initial="initial" animate="animate" exit="exit" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  {/* Hero */}
-                  <Card style={{ padding: "26px 30px", background: "linear-gradient(135deg, rgba(34,211,238,0.07), rgba(129,140,248,0.05) 55%, rgba(167,139,250,0.05))", borderColor: "rgba(34,211,238,0.16)" }} hover={false}>
-                    <Eyebrow>Building toward</Eyebrow>
-                    <div style={{ marginTop: 10, fontSize: 26, fontWeight: 600, lineHeight: 1.18, letterSpacing: "-0.025em" }}>
-                      Client engagement in <span style={{ color: "#22d3ee" }}>financial technology</span>
-                    </div>
-                    <Pip color="#22d3ee" style={{ marginTop: 14 }} />
-                    <p style={{ marginTop: 12, fontSize: 12.5, color: C.muted, lineHeight: 1.72, maxWidth: 520 }}>
-                      Consulting foundation, workflow design depth, and a deliberate pivot toward client-facing roles in institutional fintech.
-                    </p>
-                    <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
-                      <button onClick={() => setPage("journey")} style={{ padding: "7px 16px", borderRadius: 11, background: "white", color: "#06090f", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600, fontFamily: F.d }}>Explore journey →</button>
-                      <button onClick={() => setPage("work")} style={{ padding: "7px 16px", borderRadius: 11, background: "transparent", color: C.muted, border: `1px solid ${C.border}`, cursor: "pointer", fontSize: 12, fontFamily: F.d }}>View case work</button>
+
+                  {/* Hero with photo */}
+                  <Card style={{ padding: 0, overflow: "hidden", background: "linear-gradient(135deg, rgba(34,211,238,0.07), rgba(129,140,248,0.05) 55%, rgba(167,139,250,0.05))", borderColor: "rgba(34,211,238,0.16)" }} hover={false}>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 170px" }}>
+                      <div style={{ padding: "26px 30px" }}>
+                        <Eyebrow>Building toward</Eyebrow>
+                        <div style={{ marginTop: 10, fontSize: 26, fontWeight: 600, lineHeight: 1.18, letterSpacing: "-0.025em", color: C.text }}>
+                          Client engagement in <span style={{ color: "#22d3ee" }}>financial technology</span>
+                        </div>
+                        <Pip color="#22d3ee" style={{ marginTop: 14 }} />
+                        <p style={{ marginTop: 12, fontSize: 12.5, color: C.muted, lineHeight: 1.72, maxWidth: 440 }}>
+                          Consulting foundation, workflow design depth, and a deliberate pivot toward client-facing roles in institutional fintech.
+                        </p>
+                        <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
+                          <button onClick={() => setPage("journey")} style={{ padding: "7px 16px", borderRadius: 11, background: "white", color: "#06090f", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600, fontFamily: F.d }}>Explore journey →</button>
+                          <button onClick={() => setPage("work")} style={{ padding: "7px 16px", borderRadius: 11, background: "transparent", color: C.muted, border: `1px solid ${C.border}`, cursor: "pointer", fontSize: 12, fontFamily: F.d }}>View case work</button>
+                        </div>
+                      </div>
+                      {/* Profile photo — bg removed via mix-blend-mode */}
+                      <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", overflow: "hidden" }}>
+                        <img src="/MyIMG.PNG" alt="Jay Shiurkar"
+                          style={{ width: 160, height: 200, objectFit: "cover", objectPosition: "center top", borderRadius: "14px 14px 0 0", display: "block", mixBlendMode: "luminosity", filter: "brightness(0.92) contrast(1.05)" }} />
+                      </div>
                     </div>
                   </Card>
 
-                  {/* Stats */}
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
+                  {/* 2 stat cards */}
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10 }}>
                     {[
                       { label: "Foundation", value: "4+ yrs", detail: "Deloitte consulting" },
-                      { label: "Education", value: "NYU MOT", detail: "Graduating May 2026" },
-                      { label: "Target", value: "Fintech", detail: "Institutional platforms" },
+                      { label: "Education", value: "NYU", detail: "Technology Management · May 2026" },
                     ].map(m => (
                       <Card key={m.label} style={{ padding: 16 }}>
                         <Eyebrow>{m.label}</Eyebrow>
-                        <div style={{ marginTop: 8, fontSize: 19, fontWeight: 600 }}>{m.value}</div>
-                        <div style={{ marginTop: 4, fontSize: 11, color: C.faint }}>{m.detail}</div>
+                        <div style={{ marginTop: 8, fontSize: 19, fontWeight: 600, color: C.text }}>{m.value}</div>
+                        <div style={{ marginTop: 4, fontSize: 11, color: C.muted }}>{m.detail}</div>
                       </Card>
                     ))}
                   </div>
 
-                  {/* Brings + Targets */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1.25fr 0.75fr", gap: 10 }}>
-                    <Card style={{ padding: 20 }}>
-                      <Eyebrow>What I bring</Eyebrow>
-                      <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 7 }}>
-                        {[
-                          { icon: Users, text: "Client discovery & stakeholder alignment" },
-                          { icon: Layers, text: "Workflow translation & requirements" },
-                          { icon: Code2, text: "Testing, delivery & automation" },
-                          { icon: TrendingUp, text: "Training, adoption & platform enablement" },
-                        ].map(({ icon: Icon, text }) => (
-                          <div key={text} style={{ display: "flex", alignItems: "center", gap: 10, padding: "7px 11px", borderRadius: 10, background: "rgba(255,255,255,0.025)" }}>
-                            <Icon size={12} style={{ color: "#22d3ee", flexShrink: 0 }} />
-                            <span style={{ fontSize: 12, color: C.muted }}>{text}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </Card>
-                    <Card style={{ padding: 20 }}>
-                      <Eyebrow>Target employers</Eyebrow>
-                      <div style={{ marginTop: 12, display: "flex", flexWrap: "wrap", gap: 5 }}>
-                        {["BlackRock", "Google", "JP Morgan", "MongoDB", "Nasdaq", "PGIM", "LinkedIn", "Workato", "Preqin", "Verisk"].map(e => (
-                          <Tag key={e}>{e}</Tag>
-                        ))}
-                      </div>
-                    </Card>
-                  </div>
+                  {/* What I bring */}
+                  <Card style={{ padding: 20 }}>
+                    <Eyebrow>What I bring</Eyebrow>
+                    <div style={{ marginTop: 12, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                      {[
+                        { icon: Users, text: "Client discovery & stakeholder alignment" },
+                        { icon: Layers, text: "Workflow translation & requirements" },
+                        { icon: Code2, text: "Testing, delivery & automation" },
+                        { icon: TrendingUp, text: "Training, adoption & platform enablement" },
+                      ].map(({ icon: Icon, text }) => (
+                        <div key={text} style={{ display: "flex", alignItems: "center", gap: 10, padding: "7px 11px", borderRadius: 10, background: "rgba(255,255,255,0.03)", border: `1px solid ${C.border}` }}>
+                          <Icon size={12} style={{ color: "#22d3ee", flexShrink: 0 }} />
+                          <span style={{ fontSize: 12, color: C.muted }}>{text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </Card>
                 </motion.div>
               )}
 
@@ -296,10 +286,9 @@ export default function Portfolio() {
                 <motion.div key="journey" variants={pv} initial="initial" animate="animate" exit="exit" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   <Card style={{ padding: "18px 24px" }} hover={false}>
                     <Eyebrow>Journey</Eyebrow>
-                    <div style={{ marginTop: 6, fontSize: 20, fontWeight: 600, letterSpacing: "-0.02em" }}>How I got here</div>
+                    <div style={{ marginTop: 6, fontSize: 20, fontWeight: 600, color: C.text }}>How I got here</div>
                     <div style={{ marginTop: 14 }}><Timeline /></div>
                   </Card>
-
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                     {JOURNEY.map((item) => {
                       const Icon = item.icon;
@@ -310,7 +299,7 @@ export default function Portfolio() {
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                               <div style={{ flex: 1, minWidth: 0, paddingRight: 10 }}>
                                 <Eyebrow>{item.kicker}</Eyebrow>
-                                <div style={{ marginTop: 6, fontSize: 13.5, fontWeight: 600, lineHeight: 1.3 }}>{item.title}</div>
+                                <div style={{ marginTop: 6, fontSize: 13.5, fontWeight: 600, lineHeight: 1.3, color: sel ? item.color : C.text }}>{item.title}</div>
                               </div>
                               <IconBox icon={Icon} color={item.color} size={34} />
                             </div>
@@ -325,9 +314,7 @@ export default function Portfolio() {
                                 </motion.div>
                               )}
                             </AnimatePresence>
-                            {!sel && (
-                              <p style={{ marginTop: 8, fontSize: 11.5, color: C.faint, lineHeight: 1.55 }}>{item.summary.substring(0, 68)}…</p>
-                            )}
+                            {!sel && <p style={{ marginTop: 8, fontSize: 11.5, color: C.muted, lineHeight: 1.55 }}>{item.summary.substring(0, 68)}…</p>}
                           </Card>
                         </button>
                       );
@@ -342,7 +329,7 @@ export default function Portfolio() {
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                     <Card style={{ padding: 22 }} hover={false}>
                       <Eyebrow>Skill overlap</Eyebrow>
-                      <div style={{ marginTop: 6, fontSize: 19, fontWeight: 600 }}>Built from both sides</div>
+                      <div style={{ marginTop: 6, fontSize: 19, fontWeight: 600, color: C.text }}>Built from both sides</div>
                       <div style={{ marginTop: 14 }}><MiniVenn /></div>
                     </Card>
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -352,14 +339,14 @@ export default function Portfolio() {
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                               <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
                                 <div style={{ width: 7, height: 7, borderRadius: "50%", background: cat.color, boxShadow: selSkill === cat.id ? `0 0 8px ${cat.color}80` : "none" }} />
-                                <span style={{ fontSize: 13, fontWeight: 600 }}>{cat.label}</span>
+                                <span style={{ fontSize: 13, fontWeight: 600, color: C.text }}>{cat.label}</span>
                               </div>
-                              <span style={{ fontSize: 10, color: C.faint, fontFamily: F.m }}>{cat.skills.length} skills</span>
+                              <span style={{ fontSize: 10, color: C.muted, fontFamily: F.m }}>{cat.skills.length} skills</span>
                             </div>
                             {selSkill === cat.id && (
                               <div style={{ marginTop: 10, display: "flex", flexWrap: "wrap", gap: 5 }}>
-                                {cat.skills.slice(0, 4).map(s => <Tag key={s} color={`${cat.color}35`} textColor="rgba(255,255,255,0.65)">{s}</Tag>)}
-                                {cat.skills.length > 4 && <Tag color={C.border} textColor={C.faint}>+{cat.skills.length - 4}</Tag>}
+                                {cat.skills.slice(0, 4).map(s => <Tag key={s} color={`${cat.color}35`} textColor="rgba(255,255,255,0.82)">{s}</Tag>)}
+                                {cat.skills.length > 4 && <Tag color={C.border} textColor={C.muted}>+{cat.skills.length - 4}</Tag>}
                               </div>
                             )}
                           </Card>
@@ -367,7 +354,6 @@ export default function Portfolio() {
                       ))}
                     </div>
                   </div>
-
                   {activeSkill && (
                     <motion.div key={selSkill} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                       <Card style={{ padding: 22 }}>
@@ -379,7 +365,7 @@ export default function Portfolio() {
                           <SkillBars category={activeSkill} />
                           <div style={{ display: "flex", flexWrap: "wrap", gap: 5, alignContent: "flex-start" }}>
                             {activeSkill.skills.map(s => (
-                              <Tag key={s} color={`${activeSkill.color}35`} textColor="rgba(255,255,255,0.65)">{s}</Tag>
+                              <Tag key={s} color={`${activeSkill.color}35`} textColor="rgba(255,255,255,0.82)">{s}</Tag>
                             ))}
                           </div>
                         </div>
@@ -396,7 +382,7 @@ export default function Portfolio() {
                     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                       <Card style={{ padding: "14px 18px" }} hover={false}>
                         <Eyebrow>Case work</Eyebrow>
-                        <div style={{ marginTop: 5, fontSize: 19, fontWeight: 600 }}>Collaboration & delivery</div>
+                        <div style={{ marginTop: 5, fontSize: 19, fontWeight: 600, color: C.text }}>Collaboration & delivery</div>
                       </Card>
                       {WORK.map(item => {
                         const sel = selWork === item.id;
@@ -406,8 +392,8 @@ export default function Portfolio() {
                               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                                 <div style={{ flex: 1, minWidth: 0 }}>
                                   <Tag color={`${item.color}30`} textColor={item.color}>{item.badge}</Tag>
-                                  <div style={{ marginTop: 8, fontSize: 13, fontWeight: 600, lineHeight: 1.3 }}>{item.title}</div>
-                                  <div style={{ marginTop: 3, fontSize: 11, color: C.faint }}>{item.kicker}</div>
+                                  <div style={{ marginTop: 8, fontSize: 13, fontWeight: 600, lineHeight: 1.3, color: C.text }}>{item.title}</div>
+                                  <div style={{ marginTop: 3, fontSize: 11, color: C.muted }}>{item.kicker}</div>
                                 </div>
                                 <ChevronRight size={13} style={{ color: C.faint, marginTop: 4, transform: sel ? "rotate(90deg)" : "none", transition: "transform 0.2s", flexShrink: 0 }} />
                               </div>
@@ -416,18 +402,17 @@ export default function Portfolio() {
                         );
                       })}
                     </div>
-
                     <AnimatePresence mode="wait">
                       {activeWork && (
                         <motion.div key={activeWork.id} initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -5 }} transition={{ duration: 0.2 }}>
                           <Card style={{ padding: 24, borderColor: `${activeWork.color}30`, height: "100%" }} hover={false}>
                             <Tag color={`${activeWork.color}30`} textColor={activeWork.color}>{activeWork.badge}</Tag>
-                            <div style={{ marginTop: 14, fontSize: 17, fontWeight: 600, lineHeight: 1.3 }}>{activeWork.title}</div>
+                            <div style={{ marginTop: 14, fontSize: 17, fontWeight: 600, lineHeight: 1.3, color: C.text }}>{activeWork.title}</div>
                             <Pip color={activeWork.color} style={{ marginTop: 12 }} />
                             <p style={{ marginTop: 12, fontSize: 12.5, color: C.muted, lineHeight: 1.75 }}>{activeWork.summary}</p>
                             <div style={{ marginTop: 14, padding: 13, borderRadius: 12, background: `${activeWork.color}0d`, border: `1px solid ${activeWork.color}20` }}>
                               <Eyebrow>Impact</Eyebrow>
-                              <div style={{ marginTop: 6, fontSize: 12.5, color: "rgba(255,255,255,0.72)" }}>{activeWork.impact}</div>
+                              <div style={{ marginTop: 6, fontSize: 12.5, color: C.muted }}>{activeWork.impact}</div>
                             </div>
                             <div style={{ marginTop: 12, display: "flex", flexWrap: "wrap", gap: 5 }}>
                               {activeWork.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
@@ -445,9 +430,8 @@ export default function Portfolio() {
                 <motion.div key="thinking" variants={pv} initial="initial" animate="animate" exit="exit" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   <Card style={{ padding: "16px 22px" }} hover={false}>
                     <Eyebrow>Principles</Eyebrow>
-                    <div style={{ marginTop: 6, fontSize: 20, fontWeight: 600 }}>Client lens & working principles</div>
+                    <div style={{ marginTop: 6, fontSize: 20, fontWeight: 600, color: C.text }}>Client lens & working principles</div>
                   </Card>
-
                   <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 10 }}>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                       {THINKING.map(item => {
@@ -457,20 +441,19 @@ export default function Portfolio() {
                           <button key={item.id} onClick={() => setSelThink(item.id)} style={cardBtn()}>
                             <Card style={{ padding: 18, borderColor: sel ? `${item.accent}45` : C.border, background: sel ? `${item.accent}0c` : C.card, height: "100%" }}>
                               <IconBox icon={Icon} color={item.accent} size={34} />
-                              <div style={{ marginTop: 11, fontSize: 13, fontWeight: 600, lineHeight: 1.35 }}>{item.title}</div>
+                              <div style={{ marginTop: 11, fontSize: 13, fontWeight: 600, lineHeight: 1.35, color: sel ? item.accent : C.text }}>{item.title}</div>
                               <Pip color={item.accent} style={{ marginTop: 10 }} />
                             </Card>
                           </button>
                         );
                       })}
                     </div>
-
                     <AnimatePresence mode="wait">
                       {activeThink && (
                         <motion.div key={activeThink.id} initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
                           <Card style={{ padding: 24, borderColor: `${activeThink.accent}30`, height: "100%" }} hover={false}>
                             <IconBox icon={activeThink.icon} color={activeThink.accent} size={42} />
-                            <div style={{ marginTop: 14, fontSize: 17, fontWeight: 600 }}>{activeThink.title}</div>
+                            <div style={{ marginTop: 14, fontSize: 17, fontWeight: 600, color: C.text }}>{activeThink.title}</div>
                             <Pip color={activeThink.accent} style={{ marginTop: 12 }} />
                             <p style={{ marginTop: 12, fontSize: 12.5, color: C.muted, lineHeight: 1.75 }}>{activeThink.principle}</p>
                           </Card>
@@ -487,20 +470,12 @@ export default function Portfolio() {
                   <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: 10 }}>
                     <Card style={{ padding: "26px 28px", background: "linear-gradient(135deg, rgba(34,211,238,0.07), rgba(129,140,248,0.05))", borderColor: "rgba(34,211,238,0.14)" }} hover={false}>
                       <Eyebrow>Contact</Eyebrow>
-                      <div style={{ marginTop: 10, fontSize: 20, fontWeight: 600, lineHeight: 1.3 }}>
-                        Open to conversations in client engagement & fintech
-                      </div>
+                      <div style={{ marginTop: 10, fontSize: 20, fontWeight: 600, lineHeight: 1.3, color: C.text }}>Open to conversations in client engagement & fintech</div>
                       <Pip color="#22d3ee" style={{ marginTop: 14 }} />
-                      <p style={{ marginTop: 12, fontSize: 12.5, color: C.muted, lineHeight: 1.7 }}>
-                        Based in New York City. Interested in roles combining client trust, financial domain learning, and platform execution.
-                      </p>
+                      <p style={{ marginTop: 12, fontSize: 12.5, color: C.muted, lineHeight: 1.7 }}>Based in New York City. Interested in roles combining client trust, financial domain learning, and platform execution.</p>
                       <div style={{ marginTop: 18, display: "flex", gap: 8, flexWrap: "wrap" }}>
-                        <a href="mailto:jayshiurkar@gmail.com" style={{ padding: "8px 16px", borderRadius: 11, background: "white", color: "#06090f", textDecoration: "none", fontSize: 12, fontWeight: 600, fontFamily: F.d }}>
-                          jayshiurkar@gmail.com
-                        </a>
-                        <a href="https://www.linkedin.com/in/jayshiurkar" target="_blank" rel="noreferrer" style={{ padding: "8px 16px", borderRadius: 11, border: `1px solid ${C.border}`, background: C.card, color: C.muted, textDecoration: "none", fontSize: 12, fontFamily: F.d }}>
-                          LinkedIn →
-                        </a>
+                        <a href="mailto:jayshiurkar@gmail.com" style={{ padding: "8px 16px", borderRadius: 11, background: "white", color: "#06090f", textDecoration: "none", fontSize: 12, fontWeight: 600, fontFamily: F.d }}>jayshiurkar@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/jayshiurkar" target="_blank" rel="noreferrer" style={{ padding: "8px 16px", borderRadius: 11, border: `1px solid ${C.border}`, background: C.card, color: C.muted, textDecoration: "none", fontSize: 12, fontFamily: F.d }}>LinkedIn →</a>
                       </div>
                     </Card>
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -511,8 +486,8 @@ export default function Portfolio() {
                       ].map(m => (
                         <Card key={m.label} style={{ padding: 16 }}>
                           <Eyebrow>{m.label}</Eyebrow>
-                          <div style={{ marginTop: 7, fontSize: 15, fontWeight: 600 }}>{m.value}</div>
-                          <div style={{ marginTop: 3, fontSize: 11, color: C.faint }}>{m.detail}</div>
+                          <div style={{ marginTop: 7, fontSize: 15, fontWeight: 600, color: C.text }}>{m.value}</div>
+                          <div style={{ marginTop: 3, fontSize: 11, color: C.muted }}>{m.detail}</div>
                         </Card>
                       ))}
                     </div>
@@ -526,17 +501,13 @@ export default function Portfolio() {
       </div>
 
       {/* Mobile bottom nav */}
-      <div style={{ position: "fixed", bottom: 14, left: "50%", transform: "translateX(-50%)", zIndex: 40, display: "flex", background: "rgba(6,9,15,0.9)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${C.border}`, borderRadius: 20, padding: 6, gap: 2 }}>
+      <div style={{ position: "fixed", bottom: 14, left: "50%", transform: "translateX(-50%)", zIndex: 40, display: "flex", background: "rgba(6,9,15,0.92)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${C.border}`, borderRadius: 20, padding: 6, gap: 2 }}>
         {PAGES.map(p => {
           const Icon = p.icon;
           const active = page === p.id;
           return (
-            <button
-              key={p.id}
-              onClick={() => setPage(p.id)}
-              title={p.label}
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 13px", borderRadius: 14, background: active ? "rgba(255,255,255,0.1)" : "transparent", border: "none", cursor: "pointer", color: active ? C.text : C.muted, transition: "all 0.15s" }}
-            >
+            <button key={p.id} onClick={() => setPage(p.id)} title={p.label}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 13px", borderRadius: 14, background: active ? "rgba(255,255,255,0.10)" : "transparent", border: "none", cursor: "pointer", color: active ? C.text : C.muted, transition: "all 0.15s" }}>
               <Icon size={15} />
             </button>
           );
