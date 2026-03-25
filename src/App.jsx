@@ -268,7 +268,7 @@ export default function Portfolio() {
                       {!isMobile && (
                         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", paddingRight: 12, overflow: "hidden", height: 230 }}>
                           <div style={{ position: "relative", width: 170, height: 220 }}>
-                            <img src="/MyIMG.PNG" alt="Jay Shiurkar"
+                            <img src="/MyIMG.JPEG" alt="Jay Shiurkar"
                               style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", borderRadius: "16px 16px 0 0", display: "block" }} />
                             {/* bottom fade overlay */}
                             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, background: "linear-gradient(to top, rgba(8,14,24,0.85), transparent)", borderRadius: "0 0 0 0" }} />
