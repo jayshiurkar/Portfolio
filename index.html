@@ -9,6 +9,17 @@
       *, *::before, *::after { box-sizing: border-box; }
       html, body { margin: 0; padding: 0; background: #06090f; }
     </style>
+    <script>
+      (function () {
+        var redirect = sessionStorage.getItem('redirectPath');
+        if (redirect) {
+          sessionStorage.removeItem('redirectPath');
+          if (window.location.pathname !== redirect) {
+            window.history.replaceState(null, '', redirect);
+          }
+        }
+      })();
+    </script>
   </head>
   <body style="background:#06090f;margin:0;padding:0;">
     <div id="root"></div>
