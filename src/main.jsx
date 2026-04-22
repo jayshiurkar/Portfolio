@@ -11,9 +11,10 @@ if (redirectedPath) {
 }
 
 const path = window.location.pathname;
+const hash = window.location.hash || "";
 
 function RootRouter() {
-  if (path.includes("/projects/scmprj")) {
+  if (path.includes("/projects/scmprj") || hash.includes("#/projects/scmprj")) {
     return <SCMProject />;
   }
 
