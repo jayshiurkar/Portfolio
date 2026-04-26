@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P&C Insurance Agent Workflow | Jay Shiurkar</title>
+  <meta name="description" content="AI-enabled P&C insurance agent workflow for FNOL, claims triage, policy servicing, payment status, and broker-carrier handoffs." />
+  <style>
+    :root {
+      --bg: #07111f;
+      --card: #ffffff;
+      --ink: #172033;
+      --muted: #5f6b7a;
+      --accent: #2563eb;
+      --accent-soft: #eaf1ff;
+      --border: #e6eaf2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #f6f8fc;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    header {
+      background: radial-gradient(circle at top left, #1d4ed8 0, #07111f 48%, #020617 100%);
+      color: white;
+      padding: 64px 8% 56px;
+    }
+
+    header .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      color: #bfdbfe;
+      margin-bottom: 14px;
+    }
+
+    header h1 {
+      max-width: 920px;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    header p {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: #dbeafe;
+      font-size: 1.08rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .button.primary { background: white; color: #0f172a; }
+    .button.secondary { border: 1px solid rgba(255,255,255,0.25); color: white; }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: -28px auto 56px;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: clamp(22px, 4vw, 34px);
+      margin-bottom: 18px;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.07);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    p { margin: 0; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: #fbfcff;
+    }
+
+    .card strong { color: var(--ink); }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .flow {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .step {
+      background: #0f172a;
+      color: white;
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 13px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    td { color: var(--muted); }
+
+    .resume-box {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .resume-box p {
+      color: #1e3a8a;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 28px 16px 44px;
+    }
+
+    @media (max-width: 720px) {
+      header { padding: 46px 24px 44px; }
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+      td { border-bottom: 0; }
+      tr { border: 1px solid var(--border); margin-bottom: 10px; border-radius: 14px; overflow: hidden; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">AI Product Workflow Design</div>
+    <h1>P&C Insurance Agent Workflow</h1>
+    <p>An insurance-grade agent workflow for first notice of loss, claims triage, policy servicing, payment status, and broker-carrier handoffs, designed with escalation logic, human oversight, audit logging, prompt evaluation, and adoption metrics.</p>
+    <div class="actions">
+      <a class="button primary" href="https://github.com/jayshiurkar/Portfolio/tree/main/projects/insurance-agent-workflow">View GitHub Project</a>
+      <a class="button secondary" href="/">Back to Portfolio</a>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Project Summary</h2>
+      <p>This project translates insurance servicing pain points into structured agent requirements and workflow logic. The design focuses on safe automation across high-volume customer and broker service interactions while preserving human review for regulated, complex, or high-risk decisions.</p>
+      <div class="tags">
+        <span class="tag">FNOL</span>
+        <span class="tag">Claims Triage</span>
+        <span class="tag">Policy Servicing</span>
+        <span class="tag">Payment Status</span>
+        <span class="tag">Broker-Carrier Handoff</span>
+        <span class="tag">Human-in-the-Loop</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Core Use Cases</h2>
+      <div class="grid">
+        <div class="card"><h3>FNOL Intake</h3><p>Capture loss details, classify incident type, validate required fields, and trigger escalation for injury, fraud indicators, or coverage uncertainty.</p></div>
+        <div class="card"><h3>Claims Triage</h3><p>Route claims by severity, urgency, policy context, document completeness, liability signals, and required handling queue.</p></div>
+        <div class="card"><h3>Policy Servicing</h3><p>Support service requests while escalating coverage interpretation, endorsements, cancellations, and regulated disclosures.</p></div>
+        <div class="card"><h3>Payment Status</h3><p>Retrieve billing context, explain payment timelines, and flag refund disputes, chargebacks, or overdue policy risk.</p></div>
+        <div class="card"><h3>Broker-Carrier Handoff</h3><p>Package request context, summarize next steps, attach missing-field logic, and route to the correct carrier or operations queue.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Workflow Logic</h2>
+      <p>The agent is structured to classify intent, retrieve context, check risk and completeness, decide whether escalation is required, and log the full decision path.</p>
+      <div class="flow">
+        <div class="step">1. User intent received</div>
+        <div class="step">2. Authenticate user or broker</div>
+        <div class="step">3. Classify insurance intent</div>
+        <div class="step">4. Retrieve policy, claim, or billing context</div>
+        <div class="step">5. Run completeness and risk checks</div>
+        <div class="step">6. Escalate or respond</div>
+        <div class="step">7. Log audit trail and metrics</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Human-in-the-Loop Controls</h2>
+      <table>
+        <thead><tr><th>Control Area</th><th>Design Decision</th></tr></thead>
+        <tbody>
+          <tr><td>Coverage uncertainty</td><td>Agent summarizes context but routes final determination to authorized staff.</td></tr>
+          <tr><td>Fraud or SIU indicators</td><td>Agent flags suspicious patterns and escalates without accusing the customer.</td></tr>
+          <tr><td>Legal or injury claims</td><td>Mandatory human review before claim guidance or next-step recommendation.</td></tr>
+          <tr><td>Low-confidence output</td><td>Agent asks clarification questions or escalates with confidence score and reason code.</td></tr>
+          <tr><td>Complaint risk</td><td>Sensitive interactions route to supervisor queue with full context summary.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Audit Logging and Evaluation</h2>
+      <div class="grid">
+        <div class="card"><strong>Audit Data</strong><p>User intent, extracted entities, source context, prompt version, escalation trigger, queue owner, SLA timestamps, human override, and final resolution.</p></div>
+        <div class="card"><strong>Prompt Evaluation</strong><p>Intent accuracy, completeness, compliance safety, escalation quality, response clarity, and auditability.</p></div>
+        <div class="card"><strong>Adoption Metrics</strong><p>FNOL containment rate, average handling time reduction, first-contact resolution, QA pass rate, human override rate, and broker handoff turnaround.</p></div>
+      </div>
+    </section>
+
+    <section class="resume-box">
+      <h2>Resume Positioning</h2>
+      <p>Designed a P&C insurance agent workflow for FNOL, claims triage, policy servicing, payment status, and broker-carrier handoffs; defined agent requirements, HITL controls, audit logging, prompt evaluation, and adoption metrics for insurance-grade automation.</p>
+    </section>
+  </main>
+
+  <footer>Built by Jay Shiurkar as an AI product and workflow implementation case study.</footer>
+</body>
+</html>
