@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P&C Insurance Agent Workflow</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f7f8fb;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    header {
+      background: #111827;
+      color: white;
+      padding: 48px 10%;
+    }
+    header h1 {
+      margin: 0 0 12px;
+      font-size: 2.2rem;
+    }
+    header p {
+      max-width: 900px;
+      font-size: 1.05rem;
+      margin: 0;
+    }
+    main {
+      max-width: 1100px;
+      margin: 32px auto;
+      padding: 0 24px 48px;
+    }
+    section {
+      background: white;
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+    h2 {
+      margin-top: 0;
+      color: #111827;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 18px;
+      background: #fafafa;
+    }
+    .tag {
+      display: inline-block;
+      background: #e8eefc;
+      color: #1e3a8a;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin: 4px 4px 4px 0;
+      font-size: 0.9rem;
+    }
+    .flow {
+      font-family: monospace;
+      white-space: pre-wrap;
+      background: #0f172a;
+      color: #e5e7eb;
+      border-radius: 12px;
+      padding: 18px;
+      overflow-x: auto;
+    }
+    footer {
+      text-align: center;
+      color: #6b7280;
+      padding: 24px;
+    }
+    a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>P&C Insurance Agent Workflow</h1>
+    <p>AI-enabled workflow design for first notice of loss, claims triage, policy servicing, payment status, and broker-carrier handoffs with human oversight, audit logging, and adoption metrics.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Project Summary</h2>
+      <p>This project converts property and casualty insurance servicing pain points into structured agent requirements, escalation logic, compliance-safe response rules, and operational metrics. The workflow is designed for customer service teams, claims intake teams, brokers, supervisors, and compliance reviewers.</p>
+      <div>
+        <span class="tag">FNOL</span>
+        <span class="tag">Claims Triage</span>
+        <span class="tag">Policy Servicing</span>
+        <span class="tag">Payment Status</span>
+        <span class="tag">Broker Handoff</span>
+        <span class="tag">Human-in-the-Loop</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Core Use Cases</h2>
+      <div class="grid">
+        <div class="card"><strong>FNOL Intake</strong><br />Capture incident details, classify loss type, validate required fields, and identify escalation triggers.</div>
+        <div class="card"><strong>Claims Triage</strong><br />Route claims by severity, urgency, missing documents, coverage uncertainty, and legal involvement.</div>
+        <div class="card"><strong>Policy Servicing</strong><br />Support policy questions and service tasks while escalating coverage interpretation and regulated actions.</div>
+        <div class="card"><strong>Payment Status</strong><br />Retrieve billing context, explain payment status, and flag refund disputes or overdue policy risk.</div>
+        <div class="card"><strong>Broker-Carrier Handoff</strong><br />Summarize request context, package missing documents, and route to the correct carrier team.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Workflow Logic</h2>
+      <div class="flow">User Intent → Authentication → Intent Classification → Context Retrieval → Risk and Completeness Checks → Escalation Decision → Agent Response or Human Queue → Audit Log and Metrics</div>
+    </section>
+
+    <section>
+      <h2>Human-in-the-Loop Controls</h2>
+      <ul>
+        <li>Escalate coverage uncertainty, injury claims, legal involvement, fraud indicators, and low-confidence outputs.</li>
+        <li>Allow the agent to summarize context, collect missing information, and prepare service tasks without making unauthorized coverage decisions.</li>
+        <li>Capture escalation reasons, human overrides, final resolution status, and SLA timestamps for QA and compliance review.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Evaluation and Adoption Metrics</h2>
+      <div class="grid">
+        <div class="card">FNOL containment rate</div>
+        <div class="card">Average handling time reduction</div>
+        <div class="card">Escalation precision and recall</div>
+        <div class="card">First-contact resolution rate</div>
+        <div class="card">QA pass rate</div>
+        <div class="card">Human override rate</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Resume Positioning</h2>
+      <p><strong>AI Insurance Workflow Product Design:</strong> Designed a P&C insurance agent workflow covering FNOL, claims triage, policy servicing, payment status, and broker-carrier handoffs; defined agent requirements, HITL controls, audit logging, prompt evaluation criteria, and adoption metrics for insurance-grade service automation.</p>
+      <p><a href="https://github.com/jayshiurkar/Portfolio/tree/main/projects/insurance-agent-workflow">View project source on GitHub</a></p>
+    </section>
+  </main>
+
+  <footer>Built as a product workflow and implementation case study.</footer>
+</body>
+</html>
