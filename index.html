@@ -8,6 +8,29 @@
     <style>
       *, *::before, *::after { box-sizing: border-box; }
       html, body { margin: 0; padding: 0; background: #06090f; }
+      .jjobpilot-admin-link {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 9999;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        padding: 7px 13px;
+        border-radius: 999px;
+        border: 1px solid rgba(34, 211, 238, 0.42);
+        background: rgba(6, 9, 15, 0.78);
+        color: #dffbff;
+        font: 600 11px/1.1 "DM Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        text-transform: uppercase;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(12px);
+      }
+      .jjobpilot-admin-link:hover { border-color: rgba(34, 211, 238, 0.7); background: rgba(34, 211, 238, 0.14); }
+      @media (max-width: 640px) { .jjobpilot-admin-link { top: 12px; right: 12px; min-height: 32px; padding: 7px 11px; } }
     </style>
     <script>
       (function () {
@@ -22,6 +45,7 @@
     </script>
   </head>
   <body style="background:#06090f;margin:0;padding:0;">
+    <a class="jjobpilot-admin-link" href="https://jjobpilot-ai.vercel.app/admin" target="_blank" rel="noreferrer" aria-label="Open JJobPilot AI admin workspace">Admin</a>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
