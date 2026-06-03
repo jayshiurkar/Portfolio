@@ -184,6 +184,7 @@ export default function Portfolio() {
   const activeWork  = WORK.find(w => w.id === selWork);
   const activeThink = THINKING.find(t => t.id === selThink);
   const activeSkill = SKILL_CATS.find(s => s.id === selSkill);
+  const jjobPilotUrl = import.meta.env.VITE_JJOBPILOT_URL || "https://admin.jayshiurkar.com";
   const cardBtn     = (extra = {}) => ({ textAlign: "left", background: "none", border: "none", padding: 0, cursor: "pointer", width: "100%", display: "block", ...extra });
 
   /* responsive values */
@@ -206,11 +207,17 @@ export default function Portfolio() {
             <span style={{ fontSize: isMobile ? 14 : 15, fontWeight: 600, color: C.text }}>Jay Shiurkar</span>
             {!isMobile && <span style={{ fontSize: 11, color: C.muted, fontFamily: F.m }}>NYC · Technology Management</span>}
           </Card>
-          {!isMobile && (
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-              {["Client Engagement", "Financial Technology", "Institutional Workflows"].map(t => <Tag key={t}>{t}</Tag>)}
-            </div>
-          )}
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center", justifyContent: "flex-end" }}>
+            {!isMobile && ["Client Engagement", "Financial Technology", "Institutional Workflows"].map(t => <Tag key={t}>{t}</Tag>)}
+            <a
+              href={jjobPilotUrl}
+              target="_blank"
+              rel="noreferrer"
+              style={{ padding: "6px 12px", borderRadius: 20, border: "1px solid rgba(34,211,238,0.35)", background: "rgba(34,211,238,0.10)", color: "#dffbff", textDecoration: "none", fontSize: 11, fontFamily: F.m, letterSpacing: "0.08em", textTransform: "uppercase", whiteSpace: "nowrap" }}
+            >
+              Admin
+            </a>
+          </div>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "186px 1fr", gap: gap, alignItems: "start" }}>
